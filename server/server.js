@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 require('dotenv').config();
+
+const authRouter = require('./routes/auth/auth-routes')
 const PORT = process.env.PORT || 5000;
 
 mongoose.connect(process.env.MONGODB_URL)
@@ -15,7 +17,7 @@ app.use(express.json());
 
 app.use(
     cors ({
-        origin: `http://localhost/5173/`,
+        origin: `http://localhost/5173`,
         method: ['GET','POST','DELETE','PUT'],
         allowedHeaders: [
             "Content-Type",
@@ -27,5 +29,7 @@ app.use(
         credentials: true,
     })
 );
+
+app.use('/api/auth', authRouter)
 
 app.listen(PORT, () => {console.log(`Server running at PORT : ${PORT}`)});
