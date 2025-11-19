@@ -51,7 +51,7 @@ function CommonForm({
           value={value}
         >
           <SelectTrigger className="w-full">
-            <SelectValue placeholder={getControlItem.placeholder} />
+            <SelectValue placeholder={getControlItem.label} />
           </SelectTrigger>
           <SelectContent>
             {getControlItem.options && getControlItem.options.length > 0
@@ -107,7 +107,7 @@ function CommonForm({
       <div className="flex flex-col gap-3">
         {formControls.map((controlItem) => (
           <div className="grid w-full gap-1.5" key={controlItem.name}>
-            <Label className="mb-1"> {controlItem.Label}</Label>
+            <Label className="mb-1"> {controlItem.label}</Label>
             {renderInputByComponentType(controlItem)}
           </div>
         ))}
