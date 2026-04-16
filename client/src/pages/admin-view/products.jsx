@@ -1,27 +1,33 @@
 import { Fragment, useState } from "react";
 import { Button } from "../../components/ui/button";
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/Components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/Components/ui/sheet";
 import CommonForm from "@/Components/common/form";
 import { addProductFormElements } from "@/config";
+import ProductImageUpload from "@/Components/admin-view/image-upload";
 
 const initialFormData = {
-    image : null,
-    title : "",
-    description : "",
-    price : 0,
-    category : "",
-    brand : "",
-    salePrice : "",
-    totalStock : "",
-}
+  image: null,
+  title: "",
+  description: "",
+  price: 0,
+  category: "",
+  brand: "",
+  salePrice: "",
+  totalStock: "",
+};
 
 function AdminProducts() {
-
   const [openCreateProductDialog, setOpenCreateProductDialog] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
+  const [imageFile, setImageFile] = useState(null);
+  const [uploadedImageUrl, setUploadedImageUrl] = useState("");
 
-    function onSubmit(){ 
-    }
+  function onSubmit() {}
 
   return (
     <Fragment>
@@ -38,18 +44,24 @@ function AdminProducts() {
         }}
       >
         <SheetContent side="right" className="overflow-auto">
-            <SheetHeader>
-                <SheetTitle>Add New Product</SheetTitle>
-            </SheetHeader>
-            <div className="py-6">
-                <CommonForm 
-                onSubmit = { onSubmit } 
-                formData={formData} 
-                setFormData={setFormData} 
-                buttonText={"Add"}
-                formControls={addProductFormElements}
-                />
-            </div>
+          <SheetHeader>
+            <SheetTitle>Add New Product</SheetTitle>
+          </SheetHeader>
+          <ProductImageUpload
+            imageFile={imageFile}
+            setImageFile={setImageFile}
+            uploadedImageUrl={uploadedImageUrl}
+            setUploadedImageUrl={setUploadedImageUrl}
+          />
+          <div className="py-6">
+            <CommonForm
+              onSubmit={onSubmit}
+              formData={formData}
+              setFormData={setFormData}
+              buttonText={"Add"}
+              formControls={addProductFormElements}
+            />
+          </div>
         </SheetContent>
       </Sheet>
     </Fragment>
